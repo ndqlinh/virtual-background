@@ -3,11 +3,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { SelfieSegmentation } from '@mediapipe/selfie_segmentation';
 import { Camera } from '@mediapipe/camera_utils';
 
+import background from './assets/alo.jpg';
 import './App.css';
 
 const App = () => {
   const vidRef: any = useRef(null);
   const canvasRef: any = useRef(null);
+  const resultRef: any = useRef(null);
   const imageRef: any = useRef(null);
   const selectedEffect: any = useRef(null);
   let canvasCtx: any = useRef(null);
@@ -27,7 +29,6 @@ const App = () => {
   useEffect(() => {
     if (canvasRef?.current) {
       canvasCtx.current = canvasRef?.current?.getContext('2d');
-      console.log(123, 'onLoadMediapipe');
       onLoadMediapipe();
     }
   }, [canvasRef]);
@@ -40,7 +41,7 @@ const App = () => {
   }, [stream]);
 
   useEffect(() => {
-    onLoadMediapipe();
+    onLoadMediapipe(selectedEffect);
   }, [selectedEffect])
 
   const attachWebcam = () => {
@@ -56,6 +57,7 @@ const App = () => {
   };
 
   const onLoadMediapipe = (effect?: any) => {
+    resultRef.current.hidden = true;
     selectedEffect.current = effect;
     const selfieSegmentation = new SelfieSegmentation({locateFile: (file) => {
       return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`;
@@ -73,32 +75,20 @@ const App = () => {
       height: 320
     });
     camera.start();
+    generateStream();
   }
 
   const onResults = (results: any) => {
-    canvasCtx.current.save();
-    canvasCtx.current.clearRect(0, 0, canvasRef?.current?.width, canvasRef?.current?.height);
+    clearCanvas();
 
-    canvasCtx.current.globalCompositeOperation = 'copy';
-    canvasCtx.current.filter = 'none';
-    canvasCtx.current.filter = `blur(${blurIntensity}px) brightness(${brightnessMax - blurIntensity}%)`;
-    canvasCtx.current.drawImage(
-      results.segmentationMask,
-      0,
-      0,
-      canvasRef?.current?.width,
-      canvasRef?.current?.height
-    );
+    if (selectedEffect.current) {
+      canvasCtx.current.filter = `blur(${blurIntensity}px) brightness(${brightnessMax - blurIntensity}%)`;
+      drawSegmentationMask(results.segmentationMask);
+      canvasCtx.current.globalCompositeOperation = "source-in";
+      canvasCtx.current.filter = "none";
+    }
 
-    canvasCtx.current.globalCompositeOperation = 'source-in';
-    canvasCtx.current.filter = 'none';
-    canvasCtx.current.drawImage(
-      results.image,
-      0,
-      0,
-      canvasRef?.current?.width,
-      canvasRef?.current?.height
-    );
+    canvasCtx.current.drawImage(results.image, 0, 0, canvasRef?.current?.width, canvasRef?.current?.height);
 
     switch (selectedEffect.current) {
       case 'blur':
@@ -115,8 +105,9 @@ const App = () => {
   };
 
   const onChangeVirtualBg = (isBlur?: boolean, image?: HTMLImageElement) => {
+    const blurAmount = isBlur ? blurIntensity : 0;
     canvasCtx.current.globalCompositeOperation = 'destination-over';
-    canvasCtx.current.filter = isBlur ? `blur(${blurIntensity}px) brightness(${brightnessMax - blurIntensity}%)` : 'none';
+    canvasCtx.current.filter = `blur(${blurAmount}px) brightness(${brightnessMax - blurAmount}%)`;
     canvasCtx.current.drawImage(
       image,
       0,
@@ -124,10 +115,27 @@ const App = () => {
       canvasRef?.current?.width,
       canvasRef?.current?.height
     );
-  }
+  };
+
+  const drawSegmentationMask = (segmentation: any) => {
+    canvasCtx?.current?.drawImage(segmentation, 0, 0, canvasRef?.current?.width, canvasRef?.current?.height);
+  };
+
+  const clearCanvas = () => {
+    canvasCtx?.current?.clearRect(0, 0, canvasRef?.current?.width, canvasRef?.current?.height);
+  };
+
+  const generateStream = () => {
+    const stream = canvasRef?.current?.captureStream();
+    resultRef.current.srcObject = stream;
+    if (resultRef?.current?.hidden) {
+      resultRef.current.hidden = false;
+    }
+  };
 
   return (
     <div className="App">
+      <h3>Canvas:</h3>
       <div className="video-container">
         <canvas
           className="output-canvas"
@@ -145,7 +153,17 @@ const App = () => {
           playsInline
         ></video>
       </div>
-      <img ref={ imageRef } src="https://images.mrandmrssmith.com/images/1482x988/4861210-intercontinental-danang-sun-peninsula-resort-hotel-sontra-peninsula-da-nang-vietnam.jpg" alt="bg" />
+      <h3>Result:</h3>
+      <video
+        id="video-result"
+        className="video-result"
+        ref={ resultRef }
+        width="480"
+        height="320"
+        autoPlay
+        playsInline
+      ></video>
+      <img ref={ imageRef } src={ background } alt="bg" />
       <div className="btn-group">
         <button className="btn"onClick={ () => onLoadMediapipe('blur') }>Blur</button>
         <button className="btn"onClick={ () => onLoadMediapipe('virtual') }>Image</button>
