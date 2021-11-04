@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/virtual-background-demo/static/css/main.6f17b90a.chunk.css",
-    "main.js": "/virtual-background-demo/static/js/main.27b7fd6d.chunk.js",
-    "main.js.map": "/virtual-background-demo/static/js/main.27b7fd6d.chunk.js.map",
-    "runtime-main.js": "/virtual-background-demo/static/js/runtime-main.8e4914b3.js",
-    "runtime-main.js.map": "/virtual-background-demo/static/js/runtime-main.8e4914b3.js.map",
-    "static/js/2.588ca74b.chunk.js": "/virtual-background-demo/static/js/2.588ca74b.chunk.js",
-    "static/js/2.588ca74b.chunk.js.map": "/virtual-background-demo/static/js/2.588ca74b.chunk.js.map",
-    "static/js/3.65475d2b.chunk.js": "/virtual-background-demo/static/js/3.65475d2b.chunk.js",
-    "static/js/3.65475d2b.chunk.js.map": "/virtual-background-demo/static/js/3.65475d2b.chunk.js.map",
-    "index.html": "/virtual-background-demo/index.html",
-    "static/css/main.6f17b90a.chunk.css.map": "/virtual-background-demo/static/css/main.6f17b90a.chunk.css.map",
-    "static/js/2.588ca74b.chunk.js.LICENSE.txt": "/virtual-background-demo/static/js/2.588ca74b.chunk.js.LICENSE.txt"
+    "main.css": "/virtual-background/static/css/main.6f17b90a.chunk.css",
+    "main.js": "/virtual-background/static/js/main.27b7fd6d.chunk.js",
+    "main.js.map": "/virtual-background/static/js/main.27b7fd6d.chunk.js.map",
+    "runtime-main.js": "/virtual-background/static/js/runtime-main.41ec41fa.js",
+    "runtime-main.js.map": "/virtual-background/static/js/runtime-main.41ec41fa.js.map",
+    "static/js/2.588ca74b.chunk.js": "/virtual-background/static/js/2.588ca74b.chunk.js",
+    "static/js/2.588ca74b.chunk.js.map": "/virtual-background/static/js/2.588ca74b.chunk.js.map",
+    "static/js/3.65475d2b.chunk.js": "/virtual-background/static/js/3.65475d2b.chunk.js",
+    "static/js/3.65475d2b.chunk.js.map": "/virtual-background/static/js/3.65475d2b.chunk.js.map",
+    "index.html": "/virtual-background/index.html",
+    "static/css/main.6f17b90a.chunk.css.map": "/virtual-background/static/css/main.6f17b90a.chunk.css.map",
+    "static/js/2.588ca74b.chunk.js.LICENSE.txt": "/virtual-background/static/js/2.588ca74b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.8e4914b3.js",
+    "static/js/runtime-main.41ec41fa.js",
     "static/js/2.588ca74b.chunk.js",
     "static/css/main.6f17b90a.chunk.css",
     "static/js/main.27b7fd6d.chunk.js"
