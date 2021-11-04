@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/virtual-background/static/css/main.6f17b90a.chunk.css",
-    "main.js": "/virtual-background/static/js/main.22e70596.chunk.js",
-    "main.js.map": "/virtual-background/static/js/main.22e70596.chunk.js.map",
-    "runtime-main.js": "/virtual-background/static/js/runtime-main.41ec41fa.js",
-    "runtime-main.js.map": "/virtual-background/static/js/runtime-main.41ec41fa.js.map",
-    "static/js/2.89e1c95a.chunk.js": "/virtual-background/static/js/2.89e1c95a.chunk.js",
-    "static/js/2.89e1c95a.chunk.js.map": "/virtual-background/static/js/2.89e1c95a.chunk.js.map",
-    "static/js/3.65475d2b.chunk.js": "/virtual-background/static/js/3.65475d2b.chunk.js",
-    "static/js/3.65475d2b.chunk.js.map": "/virtual-background/static/js/3.65475d2b.chunk.js.map",
+    "main.css": "/virtual-background/static/css/main.4da239a0.chunk.css",
+    "main.js": "/virtual-background/static/js/main.c86602c2.chunk.js",
+    "main.js.map": "/virtual-background/static/js/main.c86602c2.chunk.js.map",
+    "runtime-main.js": "/virtual-background/static/js/runtime-main.b858776a.js",
+    "runtime-main.js.map": "/virtual-background/static/js/runtime-main.b858776a.js.map",
+    "static/js/2.ea166f3f.chunk.js": "/virtual-background/static/js/2.ea166f3f.chunk.js",
+    "static/js/2.ea166f3f.chunk.js.map": "/virtual-background/static/js/2.ea166f3f.chunk.js.map",
+    "static/js/3.2026e97d.chunk.js": "/virtual-background/static/js/3.2026e97d.chunk.js",
+    "static/js/3.2026e97d.chunk.js.map": "/virtual-background/static/js/3.2026e97d.chunk.js.map",
     "index.html": "/virtual-background/index.html",
-    "static/css/main.6f17b90a.chunk.css.map": "/virtual-background/static/css/main.6f17b90a.chunk.css.map",
-    "static/js/2.89e1c95a.chunk.js.LICENSE.txt": "/virtual-background/static/js/2.89e1c95a.chunk.js.LICENSE.txt",
+    "static/css/main.4da239a0.chunk.css.map": "/virtual-background/static/css/main.4da239a0.chunk.css.map",
+    "static/js/2.ea166f3f.chunk.js.LICENSE.txt": "/virtual-background/static/js/2.ea166f3f.chunk.js.LICENSE.txt",
     "static/media/alo.20246286.jpg": "/virtual-background/static/media/alo.20246286.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.41ec41fa.js",
-    "static/js/2.89e1c95a.chunk.js",
-    "static/css/main.6f17b90a.chunk.css",
-    "static/js/main.22e70596.chunk.js"
+    "static/js/runtime-main.b858776a.js",
+    "static/js/2.ea166f3f.chunk.js",
+    "static/css/main.4da239a0.chunk.css",
+    "static/js/main.c86602c2.chunk.js"
   ]
 }
