@@ -14,9 +14,6 @@ const App = () => {
   const selectedEffect: any = useRef(null);
   let canvasCtx: any = useRef(null);
 
-  const [stream, setStream] = useState<any>(null);
-  // const [ selectedEffect, setSelectedEffect ] = useState<any>(null);
-
   const blurIntensityMax = 100;
   const defaultBlurIntensity = 25;
   const blurIntensity = 10;
@@ -34,13 +31,6 @@ const App = () => {
   }, [canvasRef]);
 
   useEffect(() => {
-    if (stream) {
-      vidRef.current.srcObject = stream;
-      canvasCtx.current = canvasRef?.current?.getContext('2d');
-    }
-  }, [stream]);
-
-  useEffect(() => {
     onLoadMediapipe(selectedEffect);
   }, [selectedEffect])
 
@@ -48,7 +38,7 @@ const App = () => {
     if (navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({ video: true })
         .then(stream => {
-          setStream(stream);
+          vidRef.current.srcObject = stream;
         })
         .catch(error => {
           vidRef.current.srcObject = null;
@@ -57,7 +47,6 @@ const App = () => {
   };
 
   const onLoadMediapipe = (effect?: any) => {
-    resultRef.current.hidden = true;
     selectedEffect.current = effect;
     const selfieSegmentation = new SelfieSegmentation({locateFile: (file) => {
       return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`;
@@ -76,13 +65,13 @@ const App = () => {
     });
     camera.start();
     generateStream();
-  }
+  };
 
   const onResults = (results: any) => {
     clearCanvas();
 
     if (selectedEffect.current) {
-      canvasCtx.current.filter = `blur(${blurIntensity}px) brightness(${brightnessMax - blurIntensity}%)`;
+      canvasCtx.current.filter = `blur(${blurIntensity}px)`;
       drawSegmentationMask(results.segmentationMask);
       canvasCtx.current.globalCompositeOperation = "source-in";
       canvasCtx.current.filter = "none";
@@ -107,7 +96,7 @@ const App = () => {
   const onChangeVirtualBg = (isBlur?: boolean, image?: HTMLImageElement) => {
     const blurAmount = isBlur ? blurIntensity : 0;
     canvasCtx.current.globalCompositeOperation = 'destination-over';
-    canvasCtx.current.filter = `blur(${blurAmount}px) brightness(${brightnessMax - blurAmount}%)`;
+    canvasCtx.current.filter = `blur(${blurAmount}px)`;
     canvasCtx.current.drawImage(
       image,
       0,
@@ -128,15 +117,20 @@ const App = () => {
   const generateStream = () => {
     const stream = canvasRef?.current?.captureStream();
     resultRef.current.srcObject = stream;
-    if (resultRef?.current?.hidden) {
-      resultRef.current.hidden = false;
-    }
   };
 
   return (
     <div className="App">
-      <h3>Canvas:</h3>
       <div className="video-container">
+        <video
+          id="video-result"
+          className="video-result"
+          ref={ resultRef }
+          width="480"
+          height="320"
+          autoPlay
+          playsInline
+        ></video>
         <canvas
           className="output-canvas"
           ref={ canvasRef }
@@ -153,16 +147,6 @@ const App = () => {
           playsInline
         ></video>
       </div>
-      <h3>Result:</h3>
-      <video
-        id="video-result"
-        className="video-result"
-        ref={ resultRef }
-        width="480"
-        height="320"
-        autoPlay
-        playsInline
-      ></video>
       <img ref={ imageRef } src={ background } alt="bg" />
       <div className="btn-group">
         <button className="btn"onClick={ () => onLoadMediapipe('blur') }>Blur</button>
