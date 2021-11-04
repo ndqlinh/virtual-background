@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { SelfieSegmentation } from '@mediapipe/selfie_segmentation';
 import { Camera } from '@mediapipe/camera_utils';
 
-import background from './assets/alo.jpg';
+import background from './assets/bg.jpeg';
 import './App.css';
 
 const App = () => {
