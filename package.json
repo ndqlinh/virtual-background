@@ -2,7 +2,7 @@
   "name": "virtual-background-demo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tsu-linhnguyen.github.io/virtual-background-demo",
+  "homepage": "https://tsu-linhnguyen.github.io/virtual-background",
   "dependencies": {
     "@mediapipe/camera_utils": "^0.3.1632432234",
     "@mediapipe/selfie_segmentation": "^0.1.1632777926",
